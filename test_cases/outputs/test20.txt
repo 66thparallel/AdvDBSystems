@@ -1,0 +1,6 @@
+x2 = 9 (T1)
+T1 aborts (site 1 failure)
+x2 = 100 (T3)
+T3 commits
+T2 blocked reading x2 (no site)
+x2 = 90 (T5)

@@ -1,0 +1,25 @@
+// Test 3
+// T1 should not abort because its site did not fail.
+// In fact all transactions commit
+begin(T1)
+begin(T2)
+R(T1,x3)
+fail(2)
+W(T2,x8,88)
+R(T2,x3)
+W(T1, x5,91)
+end(T2)
+recover(2)
+end(T1)
+dump()
+
+// T1 reads x3, readlock on site 4
+// Site 2 fails
+// T2 writes for x8, value 88, writelock on all sites except 4, 2
+// T2 reads x3, readlock on site 4
+// T1 waiting to write x5.9 to site 6
+// T2 ends, releases locks on all sites
+// T1 writes x5.9 to site 6
+// T2 ends
+// Site 2 recovers
+// T1 ends, releases locks

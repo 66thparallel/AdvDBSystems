@@ -1,0 +1,9 @@
+begin(T2)
+begin(T1)
+W(T1,x4, 5)
+fail(2)
+W(T2,x4,44) // even at site 2 because it recovers
+recover(2)
+end(t1)
+end(T2)
+dump()

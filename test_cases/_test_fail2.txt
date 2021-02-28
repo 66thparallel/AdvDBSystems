@@ -1,0 +1,6 @@
+begin(T1)
+fail(2)
+W(T1,x1,11)
+recover(2)
+end(T1)
+dump(x1)

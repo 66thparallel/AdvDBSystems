@@ -1,0 +1,4 @@
+T1 blocked writing x1 (no site)
+x1 = 11 (T1)
+T1 commits
+site 2 - x1: 11

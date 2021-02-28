@@ -1,0 +1,27 @@
+// Test 4
+// Now T1 aborts, since site 2 died after T1 accessed it. T2 ok.
+// Normally, we wait till the end(T1) to abort T1.
+// However, it is ok to abort T1 right away when fail(2) happens. Both
+// are correct.
+begin(T1)
+begin(T2)
+R(T1,x1)
+fail(2)
+W(T2,x8,88)
+R(T2,x3)
+R(T1, x5)
+end(T2)
+recover(2)
+end(T1)
+
+// T1 reads x1, readlock on site 2
+// Site 2 fails
+// T2 writes x8: 88, writelock on all sites except 2
+// T2 reads x3, readlock on site 4
+// T1 waiting for T2 to release locks on all site, wants to read x5 on site 6
+// T2 ends, releases locks on all sites
+// T1 acquires readlock to read x5 on site 6
+// T2 ends
+// Site 2 recovers
+// T1 ends, releases locks
+//
